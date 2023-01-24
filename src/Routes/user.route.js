@@ -33,7 +33,7 @@ app.post("/signin",async(req,res)=>{
         const token=jwt.sign({id:user._id,name:user.name,email:user.email,type:user.type},secretKey,{
             expiresIn:"1 day"
         })
-      res.send({msg:"User login successfull",token})
+      res.send({msg:"User login successfull",user,token})
      }else{
         res.send({msg:"User login failed",error:"User not found"})
      }
