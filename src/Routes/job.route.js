@@ -128,6 +128,26 @@ app.get("/",async(req,res)=>{
     }
 })
 
+app.get("/admin",async(req,res)=>{
+    const token=req.headers["authorization"];
+
+    try{
+        if(token){
+            const verify=jwt.verify(token,secretKey);
+            if(verify){
+                const job=await jobModel.find({user_email:verify.email})
+                res.send({msg:"Job getting successfull",job})
+            }else{
+                res.send({msg:"Token is not valid"})
+            }
+        }else{
+            res.send({msg:"Token is not found"}) 
+        }
+    }catch(e){
+        res.send({msg:"Something went wrong",error:e.message});
+    }
+})
+
 
 
 module.exports=app
