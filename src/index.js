@@ -4,11 +4,13 @@ const PORT=process.env.PORT;
 const connect=require('./Database/dbCnnect')
 const userRouter=require("./Routes/user.route")
 const jobRouter=require("./Routes/job.route")
+const cors=require("cors")
 
 const app = express()
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.use(cors())
 
 app.get('/',(req,res)=>{
  return res.send('Hello')
